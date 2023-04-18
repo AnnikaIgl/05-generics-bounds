@@ -9,9 +9,7 @@ import java.util.Iterator;
  * Created on 10/6/17.
  */
 public class SimpleListImpl<T> implements SimpleList<T> {
-
 	private ListElement<T> head;
-	private int size;
 
 	/**
 	 * Default constructor
@@ -38,14 +36,27 @@ public class SimpleListImpl<T> implements SimpleList<T> {
 			}
 			current.setNext(new ListElement<>(item));
 		}
-		size++;
+	}
+
+	public void remove(T item){
+		if(head!=null){
+			head = head.remove(item);
+		}else{System.out.println("List was empty, could not remove object");}
+
 	}
 
 	/**
 	 * @return size of the list
 	 */
 	@Override
-	public int size() {
+	public int size()
+	{
+		int size = 0;
+		ListElement<T> current = this.head;
+		while(current != null){
+			size++;
+			current = current.next;
+		}
 		return size;
 	}
 
@@ -82,6 +93,7 @@ public class SimpleListImpl<T> implements SimpleList<T> {
 			current = current.getNext();
 			return tmp;
 		}
+
 	}
 
 	/**
@@ -119,6 +131,18 @@ public class SimpleListImpl<T> implements SimpleList<T> {
 		public void setNext(ListElement<T> next) {
 			this.next = next;
 		}
+
+		public ListElement<T> remove(T item){
+			if(this.item.equals(item)){
+				return this.next;
+			}else{
+				if(this.next != null){
+					this.next = this.next.remove(item);
+				}
+				return this;
+			}
+		}
+
 	}
 
 }

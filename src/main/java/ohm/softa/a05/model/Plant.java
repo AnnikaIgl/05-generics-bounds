@@ -29,5 +29,16 @@ public abstract class Plant implements Comparable<Plant>{
          return Objects.hashCode(this);
      }
 
-    // TODO: 16.04.2023 implement equals method 
+    @Override
+    public boolean equals(Object o){
+         if(o.getClass() != this.getClass()){
+             return false;
+         }
+         Plant tmp = (Plant)o;
+         if(tmp.getHeight() == this.getHeight() && tmp.getColor() == this.getColor() && tmp.getFamily() == this.getFamily() && this.getName() == tmp.getName()){
+             return true;
+         }
+         return false;
+
+    }
  }
